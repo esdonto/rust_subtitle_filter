@@ -1061,6 +1061,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "encoding_rs"
+version = "0.8.34"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b45de904aa0b010bce2ab45264d0631681847fa7b6f2eaa7dab7619943bc4f59"
+dependencies = [
+ "cfg-if",
+]
+
+[[package]]
 name = "endi"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2365,6 +2374,7 @@ name = "rust_subtitle_filter"
 version = "0.1.0"
 dependencies = [
  "eframe",
+ "encoding_rs",
  "regex",
  "rfd",
 ]

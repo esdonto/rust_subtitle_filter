@@ -1,4 +1,5 @@
 use std::fs;
+use encoding_rs;
 
 pub struct MovieTime {
     mili: u32,
@@ -40,7 +41,20 @@ pub fn load_subtitles(file_path: &String) -> Vec<Subtitle> {
     let mut text_buffer = String::from("");
     let mut subtitles: Vec<Subtitle> = Vec::new();
 
-    let contents = fs::read_to_string(file_path).expect("Failure at reading file");
+    let file = fs::read(file_path).expect("Failure at reading file");
+
+    // Handling the encoding
+    let (mut cow, _, had_errors) = encoding_rs::UTF_8.decode(&file);
+    if had_errors {
+        let (cow_ansi, _, had_errors_ansi) = encoding_rs::WINDOWS_1252.decode(&file);
+        if had_errors_ansi {
+            panic!("Enconding is not UTF-8 or ANSI!");
+        }
+        else {
+            cow = cow_ansi;
+        }
+    }
+    let contents =  String::from(cow);
 
     for line in contents.lines() {
         if line != "" {

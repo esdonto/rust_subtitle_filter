@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 eframe = "0.27.2"
+encoding_rs = "0.8.34"
 regex = "1.10.4"
 rfd = "0.14.1"
